@@ -7,14 +7,14 @@
 
 import Foundation
 
-public struct MovieDataDTO {
+public struct MovieDataDTO: Codable {
     let page: Int
     let totalResults: Int
     let totalPages: Int
     let results: [MovieModel]
 }
 
-struct MovieModel {
+struct MovieModel: Codable {
     let popularity: Float
     let id: Int
     let title: String
