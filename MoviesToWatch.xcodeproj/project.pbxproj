@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		871F9E492582569100251BAD /* MoviesListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871F9E482582569100251BAD /* MoviesListDataModel.swift */; };
 		8743AC6E2582194500370840 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC6D2582194500370840 /* NetworkAPI.swift */; };
-		8743AC71258219DF00370840 /* Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC70258219DF00370840 /* Extansion.swift */; };
-		8743AC7425821F6E00370840 /* MovieModelNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC7325821F6E00370840 /* MovieModelNetworkService.swift */; };
+		8743AC71258219DF00370840 /* DateFormattingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC70258219DF00370840 /* DateFormattingHelper.swift */; };
+		8743AC7425821F6E00370840 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC7325821F6E00370840 /* NetworkService.swift */; };
 		8743AC7825822D8F00370840 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC7725822D8F00370840 /* NetworkError.swift */; };
 		877A9ADB2580A360008992A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A9ADA2580A360008992A5 /* AppDelegate.swift */; };
 		877A9ADD2580A360008992A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A9ADC2580A360008992A5 /* SceneDelegate.swift */; };
@@ -21,9 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		871F9E482582569100251BAD /* MoviesListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListDataModel.swift; sourceTree = "<group>"; };
 		8743AC6D2582194500370840 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
-		8743AC70258219DF00370840 /* Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extansion.swift; sourceTree = "<group>"; };
-		8743AC7325821F6E00370840 /* MovieModelNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModelNetworkService.swift; sourceTree = "<group>"; };
+		8743AC70258219DF00370840 /* DateFormattingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormattingHelper.swift; sourceTree = "<group>"; };
+		8743AC7325821F6E00370840 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		8743AC7725822D8F00370840 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		877A9AD72580A360008992A5 /* MoviesToWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesToWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		877A9ADA2580A360008992A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 			children = (
 				8743AC6D2582194500370840 /* NetworkAPI.swift */,
 				8743AC7725822D8F00370840 /* NetworkError.swift */,
+				8743AC7325821F6E00370840 /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -90,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				877A9AF22580D796008992A5 /* MovieModel.swift */,
-				8743AC7325821F6E00370840 /* MovieModelNetworkService.swift */,
+				871F9E482582569100251BAD /* MoviesListDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -100,7 +103,7 @@
 			children = (
 				877A9ADC2580A360008992A5 /* SceneDelegate.swift */,
 				877A9ADA2580A360008992A5 /* AppDelegate.swift */,
-				8743AC70258219DF00370840 /* Extansion.swift */,
+				8743AC70258219DF00370840 /* DateFormattingHelper.swift */,
 			);
 			path = SupportinFiles;
 			sourceTree = "<group>";
@@ -194,10 +197,11 @@
 			files = (
 				877A9AF32580D796008992A5 /* MovieModel.swift in Sources */,
 				8743AC7825822D8F00370840 /* NetworkError.swift in Sources */,
-				8743AC7425821F6E00370840 /* MovieModelNetworkService.swift in Sources */,
+				8743AC7425821F6E00370840 /* NetworkService.swift in Sources */,
 				8743AC6E2582194500370840 /* NetworkAPI.swift in Sources */,
 				877A9ADF2580A360008992A5 /* ViewController.swift in Sources */,
-				8743AC71258219DF00370840 /* Extansion.swift in Sources */,
+				8743AC71258219DF00370840 /* DateFormattingHelper.swift in Sources */,
+				871F9E492582569100251BAD /* MoviesListDataModel.swift in Sources */,
 				877A9ADB2580A360008992A5 /* AppDelegate.swift in Sources */,
 				877A9ADD2580A360008992A5 /* SceneDelegate.swift in Sources */,
 			);

@@ -7,8 +7,8 @@
 
 import Foundation
 
-class MovieModelNetworkService {
-    public static let shared = MovieModelNetworkService()
+class NetworkService {
+    public static let shared = NetworkService()
 
     private func fetchDataFrom<T: Decodable>(_ url: URL?, completion: @escaping (Result<T, APIServiceError>) -> Void) {
         guard let finalURL = url else {
@@ -35,7 +35,9 @@ class MovieModelNetworkService {
     }
     //MARK: FetchMovieList
     public func fetchMoviesList(from endpoint: URL?, result: @escaping (Result<MovieDataDTO, APIServiceError>) -> Void) {
-        fetchDataFrom(endpoint, completion: result)
+        DispatchQueue.global(qos: .userInitiated).async {       //
+            self.fetchDataFrom(endpoint, completion: result)
+        }                                                       //
     }
 }
 
@@ -55,3 +57,12 @@ extension URLSession {
         }
     }
 }
+//Call data for movies
+/*        NetworkService.shared.fetchMoviesList(from: Endpoint.popular.finalURL) { (result: Result<MovieDataDTO, APIServiceError>) in
+ switch result {
+     case .success(let movieResponse):
+         print(movieResponse.results)
+     case .failure(let error):
+         print(error.localizedDescription)
+ }
+}*/
