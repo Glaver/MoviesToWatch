@@ -8,12 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var movieTableView = UITableView()
+    @IBOutlet weak var moviesTableView: UITableView!
     private let moviesListDataSource = MoviesListDataModel()
     private var moviesListData = [MovieModel]() {
         didSet {
             DispatchQueue.main.async {
-                self.movieTableView.reloadData()
+                self.moviesTableView.reloadData()
             }
         }
     }
@@ -21,38 +21,39 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesListDataSource.delegate = self
-        //createMovieTableView()
+        setupTableView()
     }
-    //MARK: - UITableViewMovies
-    func createMovieTableView() {
-        self.movieTableView = UITableView(frame: view.bounds, style: .plain)
-        movieTableView.register(UITableViewCell.self, forCellReuseIdentifier: "SectionView")
-        self.movieTableView.delegate = self
-        self.movieTableView.dataSource = self
-        movieTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(movieTableView)
-    }
-    //MARK: - UIViewDataSource
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return moviesListData.count
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return moviesListData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-        cell?.textLabel?.text = moviesListData[indexPath.row].title
-        return cell!
-    }
-    //MARK: - UIViewDataDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         moviesListDataSource.requestData()
+    }
+    //MARK: - UITableViewMovies
+    private func setupTableView() {
+        let nib = UINib(nibName: "ContentTableViewCell", bundle: nil)
+        moviesTableView.register(nib, forCellReuseIdentifier: "sectionCellIdetifire")
+    }
+    //MARK: - UIViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return moviesListData.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCellIdetifire", for: indexPath) as! ContentTableViewCell
+        cell.sectionTitile.text = moviesListData[indexPath.row].title
+        cell.sectionDate.text = DateFormattingHelper.shared.printFormattedDate(moviesListData[indexPath.row].releaseDate, printFormat: "yyyy-MM-dd")
+        cell.sectionRating.text = String(moviesListData[indexPath.row].voteAverage)
+        cell.sectionGenres.text = "Genres"
+        cell.sectionImageView.image = UIImage(named: "blur")
+        return cell
+    }
+    //MARK: - UIViewDataDelegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        tableView.frame.width / 6
+//        tableView.frame.height / 6
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Did select movie at: \(indexPath)")
     }
 }
 
@@ -64,15 +65,3 @@ extension ViewController: MoviesListDataModelDelegate {
         moviesListData = data
     }
 }
-
-//extension ViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return moviesList.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-//        cell?.textLabel?.text = moviesList[indexPath.row].title
-//        return cell!
-//    }
-//}

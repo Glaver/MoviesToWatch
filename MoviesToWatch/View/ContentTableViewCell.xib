@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sectionCellIdetifire" rowHeight="170" id="KGk-i7-Jjw" customClass="ContentTableViewCell" customModule="MoviesToWatch" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="170"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="360" height="170"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contentDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvG-yU-33r">
+                        <rect key="frame" x="131" y="139" width="95" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contentTitile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z84-sY-WnR">
+                        <rect key="frame" x="131" y="10" width="95" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contantRating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZp-GI-8yk">
+                        <rect key="frame" x="244" y="139" width="107" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contentGenres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Job-rO-wPW">
+                        <rect key="frame" x="131" y="39" width="113" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ukr-G8-XHt">
+                        <rect key="frame" x="14" y="10" width="103" height="150"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="IZp-GI-8yk" firstAttribute="leading" secondItem="IvG-yU-33r" secondAttribute="trailing" priority="900" constant="18" id="2Gt-s2-RzH"/>
+                    <constraint firstItem="IvG-yU-33r" firstAttribute="leading" secondItem="ukr-G8-XHt" secondAttribute="trailing" constant="14" id="4CF-Bg-nMh"/>
+                    <constraint firstItem="ukr-G8-XHt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6S2-7O-Bls"/>
+                    <constraint firstItem="ukr-G8-XHt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="7g3-7d-kte"/>
+                    <constraint firstAttribute="bottom" secondItem="IvG-yU-33r" secondAttribute="bottom" constant="10" id="8ho-EB-a9F"/>
+                    <constraint firstAttribute="bottom" secondItem="IZp-GI-8yk" secondAttribute="bottom" constant="10" id="L5a-YD-okt"/>
+                    <constraint firstItem="Job-rO-wPW" firstAttribute="top" secondItem="z84-sY-WnR" secondAttribute="bottom" constant="8" symbolic="YES" id="NRp-CX-JC5"/>
+                    <constraint firstItem="Job-rO-wPW" firstAttribute="leading" secondItem="ukr-G8-XHt" secondAttribute="trailing" constant="14" id="TOz-7o-LJy"/>
+                    <constraint firstItem="z84-sY-WnR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="WlA-Bi-6ya"/>
+                    <constraint firstAttribute="bottom" secondItem="ukr-G8-XHt" secondAttribute="bottom" constant="10" id="ayG-OU-wry"/>
+                    <constraint firstAttribute="trailing" secondItem="IZp-GI-8yk" secondAttribute="trailing" constant="9" id="cyD-bw-Dxj"/>
+                    <constraint firstItem="ukr-G8-XHt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fCK-Q3-oEK"/>
+                    <constraint firstItem="z84-sY-WnR" firstAttribute="leading" secondItem="ukr-G8-XHt" secondAttribute="trailing" constant="14" id="hgS-lB-tej"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="sectionDate" destination="IvG-yU-33r" id="Osm-uz-Wqd"/>
+                <outlet property="sectionGenres" destination="Job-rO-wPW" id="iVa-jH-hky"/>
+                <outlet property="sectionImageView" destination="ukr-G8-XHt" id="rRx-UW-JtF"/>
+                <outlet property="sectionRating" destination="IZp-GI-8yk" id="UaV-py-S2t"/>
+                <outlet property="sectionTitile" destination="z84-sY-WnR" id="fFq-Ep-8xo"/>
+            </connections>
+            <point key="canvasLocation" x="-310.14492753623193" y="-54.241071428571423"/>
+        </tableViewCell>
+    </objects>
+</document>
