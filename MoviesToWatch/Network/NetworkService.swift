@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NetworkService {
     public static let shared = NetworkService()
@@ -33,7 +34,7 @@ class NetworkService {
             }
         }.resume()
     }
-    //MARK: FetchMovieList
+    //MARK: - FetchMovieList
     public func fetchMoviesList(from endpoint: URL?, result: @escaping (Result<MovieDataDTO, APIServiceError>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {       //
             self.fetchDataFrom(endpoint, completion: result)
@@ -57,12 +58,44 @@ extension URLSession {
         }
     }
 }
-//Call data for movies
-/*        NetworkService.shared.fetchMoviesList(from: Endpoint.popular.finalURL) { (result: Result<MovieDataDTO, APIServiceError>) in
- switch result {
-     case .success(let movieResponse):
-         print(movieResponse.results)
-     case .failure(let error):
-         print(error.localizedDescription)
- }
-}*/
+//**************************************************************************************
+
+/// Result enum is a generic for any type of value
+/// with success and failure case
+public enum Results<T> {
+    case success(T)
+    case failure(Error)
+}
+
+final class Networking: NSObject {
+    
+    // MARK: - Private functions
+    private static func getData(url: URL,
+                                completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    // MARK: - Public function
+    
+    /// downloadImage function will download the thumbnail images
+    /// returns Result<Data> as completion handler
+    public static func downloadImage(url: URL,
+                                     completion: @escaping (Results<Data>) -> Void) {
+        Networking.getData(url: url) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            DispatchQueue.main.async() {
+                completion(.success(data))
+            }
+        }
+    }
+}
+//**************************************************************************************

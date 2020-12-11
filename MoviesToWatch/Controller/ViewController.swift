@@ -21,12 +21,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesListDataSource.delegate = self
-        createMovieTableView()
+        //createMovieTableView()
     }
     //MARK: - UITableViewMovies
     func createMovieTableView() {
         self.movieTableView = UITableView(frame: view.bounds, style: .plain)
-        movieTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        movieTableView.register(UITableViewCell.self, forCellReuseIdentifier: "SectionView")
         self.movieTableView.delegate = self
         self.movieTableView.dataSource = self
         movieTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

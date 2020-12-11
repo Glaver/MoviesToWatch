@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		871F9E492582569100251BAD /* MoviesListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871F9E482582569100251BAD /* MoviesListDataModel.swift */; };
+		871F9E4D258289EC00251BAD /* ImageCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871F9E4C258289EC00251BAD /* ImageCacheModel.swift */; };
+		871F9E5025834F3B00251BAD /* SectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 871F9E4F25834F3B00251BAD /* SectionView.xib */; };
+		871F9E5325834FFA00251BAD /* UIViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871F9E5225834FFA00251BAD /* UIViewSection.swift */; };
 		8743AC6E2582194500370840 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC6D2582194500370840 /* NetworkAPI.swift */; };
 		8743AC71258219DF00370840 /* DateFormattingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC70258219DF00370840 /* DateFormattingHelper.swift */; };
 		8743AC7425821F6E00370840 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AC7325821F6E00370840 /* NetworkService.swift */; };
@@ -23,6 +26,9 @@
 
 /* Begin PBXFileReference section */
 		871F9E482582569100251BAD /* MoviesListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListDataModel.swift; sourceTree = "<group>"; };
+		871F9E4C258289EC00251BAD /* ImageCacheModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheModel.swift; sourceTree = "<group>"; };
+		871F9E4F25834F3B00251BAD /* SectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionView.xib; sourceTree = "<group>"; };
+		871F9E5225834FFA00251BAD /* UIViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewSection.swift; sourceTree = "<group>"; };
 		8743AC6D2582194500370840 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		8743AC70258219DF00370840 /* DateFormattingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormattingHelper.swift; sourceTree = "<group>"; };
 		8743AC7325821F6E00370840 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 			children = (
 				877A9AF22580D796008992A5 /* MovieModel.swift */,
 				871F9E482582569100251BAD /* MoviesListDataModel.swift */,
+				871F9E4C258289EC00251BAD /* ImageCacheModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -119,8 +126,10 @@
 		877A9AF825812801008992A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				877A9AE52580A363008992A5 /* LaunchScreen.storyboard */,
+				871F9E4F25834F3B00251BAD /* SectionView.xib */,
+				871F9E5225834FFA00251BAD /* UIViewSection.swift */,
 				877A9AE02580A360008992A5 /* Main.storyboard */,
+				877A9AE52580A363008992A5 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +193,7 @@
 			files = (
 				877A9AE72580A363008992A5 /* LaunchScreen.storyboard in Resources */,
 				877A9AE42580A363008992A5 /* Assets.xcassets in Resources */,
+				871F9E5025834F3B00251BAD /* SectionView.xib in Resources */,
 				877A9AE22580A360008992A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,9 +209,11 @@
 				8743AC7825822D8F00370840 /* NetworkError.swift in Sources */,
 				8743AC7425821F6E00370840 /* NetworkService.swift in Sources */,
 				8743AC6E2582194500370840 /* NetworkAPI.swift in Sources */,
+				871F9E4D258289EC00251BAD /* ImageCacheModel.swift in Sources */,
 				877A9ADF2580A360008992A5 /* ViewController.swift in Sources */,
 				8743AC71258219DF00370840 /* DateFormattingHelper.swift in Sources */,
 				871F9E492582569100251BAD /* MoviesListDataModel.swift in Sources */,
+				871F9E5325834FFA00251BAD /* UIViewSection.swift in Sources */,
 				877A9ADB2580A360008992A5 /* AppDelegate.swift in Sources */,
 				877A9ADD2580A360008992A5 /* SceneDelegate.swift in Sources */,
 			);

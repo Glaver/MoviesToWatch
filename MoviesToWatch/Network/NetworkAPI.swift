@@ -7,7 +7,7 @@
 import Foundation
 
 public struct NetworkAPI {
-    static let apiKey: String = apiKey
+    static let apiKey: String = "91d8fd603d3a00e0197c9b87f99559f4"
 
     static let jsonDecoder: JSONDecoder = {
            let jsonDecoder = JSONDecoder()
