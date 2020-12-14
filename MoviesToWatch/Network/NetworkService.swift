@@ -40,6 +40,11 @@ class NetworkService {
             self.fetchDataFrom(endpoint, completion: result)
         }                                                       //
     }
+    public func fetchImage(from endpoint: URL?, result: @escaping (Result<Data, APIServiceError>) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {       //
+            self.fetchDataFrom(endpoint, completion: result)
+        }                                                       //
+    }
 }
 
 extension URLSession {
@@ -79,10 +84,8 @@ final class Networking: NSObject {
     
     /// downloadImage function will download the thumbnail images
     /// returns Result<Data> as completion handler
-    public static func downloadImage(url: URL,
-                                     completion: @escaping (Results<Data>) -> Void) {
+    public static func downloadImage(url: URL, completion: @escaping (Results<Data>) -> Void) {
         Networking.getData(url: url) { data, response, error in
-            
             if let error = error {
                 completion(.failure(error))
                 return

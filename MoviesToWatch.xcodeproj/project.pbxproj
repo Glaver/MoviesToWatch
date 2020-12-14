@@ -22,6 +22,7 @@
 		877A9AE42580A363008992A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 877A9AE32580A363008992A5 /* Assets.xcassets */; };
 		877A9AE72580A363008992A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 877A9AE52580A363008992A5 /* LaunchScreen.storyboard */; };
 		877A9AF32580D796008992A5 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A9AF22580D796008992A5 /* MovieModel.swift */; };
+		87F9E6B82584F0F700D494DF /* ImageLoaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F9E6B72584F0F700D494DF /* ImageLoaderModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		877A9AE62580A363008992A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		877A9AE82580A363008992A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		877A9AF22580D796008992A5 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		87F9E6B72584F0F700D494DF /* ImageLoaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				877A9AF22580D796008992A5 /* MovieModel.swift */,
 				871F9E482582569100251BAD /* MoviesListDataModel.swift */,
+				87F9E6B72584F0F700D494DF /* ImageLoaderModel.swift */,
 				871F9E4C258289EC00251BAD /* ImageCacheModel.swift */,
 			);
 			path = Model;
@@ -205,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87F9E6B82584F0F700D494DF /* ImageLoaderModel.swift in Sources */,
 				877A9AF32580D796008992A5 /* MovieModel.swift in Sources */,
 				8743AC7825822D8F00370840 /* NetworkError.swift in Sources */,
 				8743AC7425821F6E00370840 /* NetworkService.swift in Sources */,

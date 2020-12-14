@@ -10,6 +10,15 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var moviesTableView: UITableView!
     private let moviesListDataSource = MoviesListDataModel()
+    private let imageLoader = ImageLoaderModel()
+    private var images = UIImage() {
+        didSet {
+            DispatchQueue.main.async {
+                self.moviesTableView.reloadData()
+            }
+        
+        }
+    }
     private var moviesListData = [MovieModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -21,11 +30,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesListDataSource.delegate = self
+        imageLoader.delegate = self
         setupTableView()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         moviesListDataSource.requestData()
+        imageLoader.requestData()
     }
     //MARK: - UITableViewMovies
     private func setupTableView() {
@@ -39,18 +50,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCellIdetifire", for: indexPath) as! ContentTableViewCell
         cell.sectionTitile.text = moviesListData[indexPath.row].title
-        cell.sectionDate.text = DateFormattingHelper.shared.printFormattedDate(moviesListData[indexPath.row].releaseDate, printFormat: "yyyy-MM-dd")
+        cell.sectionDate.text = DateFormattingHelper.shared.printFormattedDate(moviesListData[indexPath.row].releaseDate, printFormat: "MMM dd,yyyy")
         cell.sectionRating.text = String(moviesListData[indexPath.row].voteAverage)
         cell.sectionGenres.text = "Genres"
-        cell.sectionImageView.image = UIImage(named: "blur")
+        cell.sectionImageView.image = UIImage(named: "blur")//mandalorain
         return cell
     }
     //MARK: - UIViewDataDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        tableView.frame.width / 6
-//        tableView.frame.height / 6
-        return UITableView.automaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+////        tableView.frame.width / 6
+////        tableView.frame.height / 6
+//        return UITableView.automaticDimension
+//    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Did select movie at: \(indexPath)")
@@ -63,5 +74,14 @@ extension ViewController: MoviesListDataModelDelegate {
     }
     func didRecive(data: [MovieModel]) {
         moviesListData = data
+    }
+}
+
+extension ViewController: ImageLoaderModelDelegate {
+    func didFail(withImage error: APIServiceError) {
+        print("\(error)")
+    }
+    func didRecive(data: UIImage) {
+        images = data
     }
 }
