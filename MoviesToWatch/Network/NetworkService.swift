@@ -10,7 +10,7 @@ import UIKit
 
 class NetworkService {
     public static let shared = NetworkService()
-
+    //MARK: - Fetch data reusable genric
     private func fetchDataFrom<T: Decodable>(_ url: URL?, completion: @escaping (Result<T, APIServiceError>) -> Void) {
         guard let finalURL = url else {
             completion(.failure(.invalidEndpoint))
@@ -34,16 +34,36 @@ class NetworkService {
             }
         }.resume()
     }
+    //MARK: - FetchImage
+    private static func getData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    public static func downloadImage(url: URL, completion: @escaping (Results<Data>) -> Void) {
+        self.getData(url: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            DispatchQueue.main.async() {
+                completion(.success(data))
+            }
+        }
+    }
     //MARK: - FetchMovieList
     public func fetchMoviesList(from endpoint: URL?, result: @escaping (Result<MovieDataDTO, APIServiceError>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {       //
+        DispatchQueue.global(qos: .userInitiated).async {
             self.fetchDataFrom(endpoint, completion: result)
-        }                                                       //
+        }
     }
-    public func fetchImage(from endpoint: URL?, result: @escaping (Result<Data, APIServiceError>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {       //
+    public func fetchMovieGenres(from endpoint: URL?, result: @escaping (Result<[GenresDTO], APIServiceError>) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
             self.fetchDataFrom(endpoint, completion: result)
-        }                                                       //
+        }
     }
 }
 
@@ -63,42 +83,10 @@ extension URLSession {
         }
     }
 }
-//**************************************************************************************
 
-/// Result enum is a generic for any type of value
-/// with success and failure case
+// Result enum is a generic for any type of value
+// with success and failure case
 public enum Results<T> {
     case success(T)
     case failure(Error)
 }
-
-final class Networking: NSObject {
-    
-    // MARK: - Private functions
-    private static func getData(url: URL,
-                                completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-    
-    // MARK: - Public function
-    
-    /// downloadImage function will download the thumbnail images
-    /// returns Result<Data> as completion handler
-    public static func downloadImage(url: URL, completion: @escaping (Results<Data>) -> Void) {
-        Networking.getData(url: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            DispatchQueue.main.async() {
-                completion(.success(data))
-            }
-        }
-    }
-}
-//**************************************************************************************

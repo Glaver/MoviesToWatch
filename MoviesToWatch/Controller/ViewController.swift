@@ -10,13 +10,15 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var moviesTableView: UITableView!
     private let moviesListDataSource = MoviesListDataModel()
-    private let imageLoader = ImageLoaderModel()
-    private var images = UIImage() {
+    private let genresDataSource = GenresDataModel()
+    private var movieGenresData = [GenresDTO]() {
         didSet {
             DispatchQueue.main.async {
                 self.moviesTableView.reloadData()
+                for genre in self.movieGenresData {
+                    print(String(genre.id) + " for " + genre.name)
+                }
             }
-        
         }
     }
     private var moviesListData = [MovieModel]() {
@@ -30,13 +32,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesListDataSource.delegate = self
-        imageLoader.delegate = self
+        genresDataSource.delegate = self
         setupTableView()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         moviesListDataSource.requestData()
-        imageLoader.requestData()
+        genresDataSource.requestData()
     }
     //MARK: - UITableViewMovies
     private func setupTableView() {
@@ -52,14 +54,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.sectionTitile.text = moviesListData[indexPath.row].title
         cell.sectionDate.text = DateFormattingHelper.shared.printFormattedDate(moviesListData[indexPath.row].releaseDate, printFormat: "MMM dd,yyyy")
         cell.sectionRating.text = String(moviesListData[indexPath.row].voteAverage)
-        cell.sectionGenres.text = "Genres"
-        cell.sectionImageView.image = UIImage(named: "blur")//mandalorain
-        return cell
+        cell.sectionGenres.text = "Genres"//moviesListData[indexPath.row].genreIds
+        cell.sectionImageView.loadThumbnail(urlSting: moviesListData[indexPath.row].posterPath ?? "")
+        
+        return cell //cell.sectionImageView.image
     }
-    //MARK: - UIViewDataDelegate
+//MARK: - UIViewDataDelegate
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-////        tableView.frame.width / 6
-////        tableView.frame.height / 6
 //        return UITableView.automaticDimension
 //    }
 
@@ -70,18 +71,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 extension ViewController: MoviesListDataModelDelegate {
     func didFail(with error: APIServiceError) {
-        print("\(error)")
+        print("Movies list: \(error)")
     }
     func didRecive(data: [MovieModel]) {
         moviesListData = data
     }
 }
 
-extension ViewController: ImageLoaderModelDelegate {
-    func didFail(withImage error: APIServiceError) {
-        print("\(error)")
+extension ViewController: GenresDataModelDelegate {
+    func didFail(error: APIServiceError) {
+        print("Genres array: \(error)")
     }
-    func didRecive(data: UIImage) {
-        images = data
+    func didRecive(data: [GenresDTO]) {
+        movieGenresData = data
     }
 }

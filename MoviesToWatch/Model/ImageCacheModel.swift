@@ -8,27 +8,24 @@
 import Foundation
 import UIKit
 
-let imageCache = NSCache<AnyObject, AnyObject>()
+let imageCache = NSCache<NSString, UIImage>()
 
-// MARK: - UIImageView extension
+ //MARK: - UIImageView extension
 extension UIImageView {
-    
-    // This loadThumbnail function is used to download thumbnail image using urlString
-    // This method also using cache of loaded thumbnail using urlString as a key of cached thumbnail.
     func loadThumbnail(urlSting: String) {
-        guard let url = URL(string: urlSting) else { return }
+        guard let url = ImageAPI.Size.medium.path(poster: urlSting)?.absoluteURL else { return }
         image = nil
-        
-        if let imageFromCache = imageCache.object(forKey: urlSting as AnyObject) {
-            image = imageFromCache as? UIImage
+
+        if let imageFromCache = imageCache.object(forKey: urlSting as NSString) {
+            image = imageFromCache// as? UIImage
             return
         }
-        Networking.downloadImage(url: url) { [weak self] result in
+        NetworkService.downloadImage(url: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
                 guard let imageToCache = UIImage(data: data) else { return }
-                imageCache.setObject(imageToCache, forKey: urlSting as AnyObject)
+                imageCache.setObject(imageToCache, forKey: urlSting as NSString)
                 self.image = UIImage(data: data)
             case .failure(_):
                 self.image = UIImage(named: "noImage")
