@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MoviesToWatch" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,8 +34,24 @@
                             <constraint firstItem="7VD-Ff-WWB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="twG-cu-cl2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="1a5-bl-7lI"/>
+                    <navigationItem key="navigationItem" id="1a5-bl-7lI">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="dtS-hP-OeJ">
+                            <rect key="frame" x="10" y="5.5" width="355" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Top rated"/>
+                                <segment title="Popular"/>
+                                <segment title="Upcoming"/>
+                                <segment title="Now Plaing"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentPickerMovies:" destination="BYZ-38-t0r" eventType="valueChanged" id="CWg-MX-gE5"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
+                        <outlet property="moviesTablePicker" destination="dtS-hP-OeJ" id="i86-GA-QyA"/>
                         <outlet property="moviesTableView" destination="7VD-Ff-WWB" id="9ak-JH-RTE"/>
                     </connections>
                 </viewController>

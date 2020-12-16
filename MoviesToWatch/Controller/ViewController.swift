@@ -9,18 +9,23 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet weak var moviesTablePicker: UISegmentedControl!
+    @IBAction func segmentPickerMovies(_ sender: UISegmentedControl) {
+        moviesListDataSource.requestData(from: moviesTablePicker.selectedSegmentIndex)
+        moviesTableView.reloadData()
+    }
     private let moviesListDataSource = MoviesListDataModel()
     private let genresDataSource = GenresDataModel()
-    private var movieGenresData = [GenresDTO]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.moviesTableView.reloadData()
-                for genre in self.movieGenresData {
-                    print(String(genre.id) + " for " + genre.name)
-                }
-            }
-        }
-    }
+//    private var movieGenresData = [GenresDTO]() {
+//        didSet {
+//            DispatchQueue.main.async {
+//                self.moviesTableView.reloadData()
+//                for genre in self.movieGenresData {
+//                    print(String(genre.id) + " for " + genre.name)
+//                }
+//            }
+//        }
+//    }
     private var moviesListData = [MovieModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -32,13 +37,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesListDataSource.delegate = self
-        genresDataSource.delegate = self
+//        genresDataSource.delegate = self
         setupTableView()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        moviesListDataSource.requestData()
-        genresDataSource.requestData()
+        moviesListDataSource.requestData(from: moviesTablePicker.selectedSegmentIndex)
+//        genresDataSource.requestData()
     }
     //MARK: - UITableViewMovies
     private func setupTableView() {
@@ -56,8 +61,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.sectionRating.text = String(moviesListData[indexPath.row].voteAverage)
         cell.sectionGenres.text = "Genres"//moviesListData[indexPath.row].genreIds
         cell.sectionImageView.loadThumbnail(urlSting: moviesListData[indexPath.row].posterPath ?? "")
-        
-        return cell //cell.sectionImageView.image
+        return cell
     }
 //MARK: - UIViewDataDelegate
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -78,11 +82,11 @@ extension ViewController: MoviesListDataModelDelegate {
     }
 }
 
-extension ViewController: GenresDataModelDelegate {
-    func didFail(error: APIServiceError) {
-        print("Genres array: \(error)")
-    }
-    func didRecive(data: [GenresDTO]) {
-        movieGenresData = data
-    }
-}
+//extension ViewController: GenresDataModelDelegate {
+//    func didFail(error: APIServiceError) {
+//        print("Genres array: \(error)")
+//    }
+//    func didRecive(data: [GenresDTO]) {
+//        movieGenresData = data
+//    }
+//}
