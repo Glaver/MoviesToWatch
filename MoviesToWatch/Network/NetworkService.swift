@@ -60,9 +60,16 @@ class NetworkService {
             self.fetchDataFrom(endpoint, completion: result)
         }
     }
+    //MARK: - FetchMovieGenres
     public func fetchMovieGenres(from endpoint: URL?, result: @escaping (Result<[GenresDTO], APIServiceError>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             self.fetchDataFrom(endpoint, completion: result)
+        }
+    }
+    //MARK: - FetchMovieSearch
+    public func fetchMoviesSearch(from string: String, result: @escaping (Result<MovieDataDTO, APIServiceError>) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.fetchDataFrom(Endpoint.search(searchString: string).finalURL, completion: result)
         }
     }
 }

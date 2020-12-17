@@ -15,7 +15,7 @@ protocol MoviesListDataModelDelegate {
 class MoviesListDataModel {
     var delegate: MoviesListDataModelDelegate?
     
-    func requestData(from: Int) {
+    func requestData(from category: Int) {
         func chooseEndpoint(for url: Int) -> URL? {
             var urlForMovies = Endpoint.topRated.finalURL
             switch url {
@@ -28,7 +28,7 @@ class MoviesListDataModel {
             return urlForMovies
         }
 
-        NetworkService.shared.fetchMoviesList(from: chooseEndpoint(for: from)) { (result: Result<MovieDataDTO, APIServiceError>) in
+        NetworkService.shared.fetchMoviesList(from: chooseEndpoint(for: category)) { (result: Result<MovieDataDTO, APIServiceError>) in
             switch result {
                 case .success(let movieResponse)://MARK: - Error Handling
                     //print(movieResponse.results)
@@ -38,6 +38,19 @@ class MoviesListDataModel {
             }
         }
     }
+    //*************************************************************************************
+    func requestDataSearch(from textField: String) {
+        NetworkService.shared.fetchMoviesSearch(from: textField) { (result: Result<MovieDataDTO, APIServiceError>) in
+            switch result {
+                case .success(let movieResponse):
+                    //print(movieResponse.results)
+                    self.setData(movieList: movieResponse.results)
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+    }
+    //*************************************************************************************
     
     func setData(movieList: [MovieModel]) -> Void {
         let data = movieList

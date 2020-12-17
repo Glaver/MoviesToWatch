@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet weak var searchBarMovies: UISearchBar!
     @IBOutlet weak var moviesTablePicker: UISegmentedControl!
     @IBAction func segmentPickerMovies(_ sender: UISegmentedControl) {
         moviesListDataSource.requestData(from: moviesTablePicker.selectedSegmentIndex)
@@ -37,6 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesListDataSource.delegate = self
+        searchBarMovies.delegate = self
 //        genresDataSource.delegate = self
         setupTableView()
     }
@@ -45,6 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         moviesListDataSource.requestData(from: moviesTablePicker.selectedSegmentIndex)
 //        genresDataSource.requestData()
     }
+
     //MARK: - UITableViewMovies
     private func setupTableView() {
         let nib = UINib(nibName: "ContentTableViewCell", bundle: nil)
@@ -58,7 +61,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCellIdetifire", for: indexPath) as! ContentTableViewCell
         cell.sectionTitile.text = moviesListData[indexPath.row].title
         cell.sectionDate.text = DateFormattingHelper.shared.printFormattedDate(moviesListData[indexPath.row].releaseDate, printFormat: "MMM dd,yyyy")
-        cell.sectionRating.text = String(moviesListData[indexPath.row].voteAverage)
+        cell.sectionRating.text = moviesListData[indexPath.row].voteAverage != 0.0 ? String(moviesListData[indexPath.row].voteAverage) : ""
         cell.sectionGenres.text = "Genres"//moviesListData[indexPath.row].genreIds
         cell.sectionImageView.loadThumbnail(urlSting: moviesListData[indexPath.row].posterPath ?? "")
         return cell
@@ -90,3 +93,12 @@ extension ViewController: MoviesListDataModelDelegate {
 //        movieGenresData = data
 //    }
 //}
+//MARK: - Search
+extension ViewController: UISearchBarDelegate {
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    moviesListDataSource.requestDataSearch(from: searchBar.text!)
+    searchBarMovies.resignFirstResponder()
+    moviesTableView.reloadData()
+    print("The search text is: '\(searchBar.text!)'")
+  }
+}

@@ -28,7 +28,7 @@ extension UIImageView {
                 imageCache.setObject(imageToCache, forKey: urlSting as NSString)
                 self.image = UIImage(data: data)
             case .failure(_):
-                self.image = UIImage(named: "noImage")
+                self.image = UIImage(named: "blur")
             }
         }
     }
