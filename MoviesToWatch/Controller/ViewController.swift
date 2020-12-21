@@ -9,8 +9,30 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBAction func filterButton(_ sender: UIBarButtonItem) {
-        print("filter tap")
-        filteredMoviesList = FilterAlertController.showFilters(on: self, inArray: moviesListData) as! [MovieModel]
+        let alertController = UIAlertController(title: "Filter", message: "Choose filter:", preferredStyle: .actionSheet)
+        
+        let actionDate = UIAlertAction(title: "Date", style: .default) { (action) in
+            FilterContent.listOfContent(&self.moviesListData, by: FilterContent.FilteredParameters.releaseDate)
+        }
+        let actionName = UIAlertAction(title: "Name", style: .default) { (action) in
+            FilterContent.listOfContent(&self.moviesListData, by: FilterContent.FilteredParameters.title)
+        }
+        let actionRating = UIAlertAction(title: "Rating", style: .default) { (action) in
+            FilterContent.listOfContent(&self.moviesListData, by: FilterContent.FilteredParameters.rating)
+        }
+        let actionPopular = UIAlertAction(title: "Popular",style: .default) { (action) in
+            FilterContent.listOfContent(&self.moviesListData, by: FilterContent.FilteredParameters.popularity)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                print("You selected the Cancel action")
+        }
+        
+        alertController.addAction(actionDate)
+        alertController.addAction(actionName)
+        alertController.addAction(actionRating)
+        alertController.addAction(actionPopular)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true)
     }
     @IBOutlet weak var moviesTableView: UITableView!
     @IBOutlet weak var searchBarMovies: UISearchBar!
@@ -31,7 +53,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            }
 //        }
 //    }
-    var filteredMoviesList = [MovieModel]()
     private var moviesListData = [MovieModel]() {
         didSet {
             DispatchQueue.main.async {
