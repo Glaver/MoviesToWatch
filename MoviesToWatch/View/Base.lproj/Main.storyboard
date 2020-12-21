@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nFX-AJ-rNe">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -8,19 +8,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Movies-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MoviesToWatch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7VD-Ff-WWB">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="135" width="429" height="757"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="8bp-Wr-MMm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="429" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
@@ -29,31 +29,35 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Eq3-ZO-CHw"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="dtS-hP-OeJ">
+                                <rect key="frame" x="27" y="96" width="375" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Top rated"/>
+                                    <segment title="Popular"/>
+                                    <segment title="Upcoming"/>
+                                    <segment title="Now Playing"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentPickerMovies:" destination="BYZ-38-t0r" eventType="valueChanged" id="CWg-MX-gE5"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7VD-Ff-WWB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="GVx-A2-KQG"/>
-                            <constraint firstItem="7VD-Ff-WWB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gqi-cd-bg0"/>
-                            <constraint firstItem="7VD-Ff-WWB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qyg-6H-4l4"/>
-                            <constraint firstItem="7VD-Ff-WWB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="twG-cu-cl2"/>
+                            <constraint firstItem="7VD-Ff-WWB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Fh8-3f-Kw8"/>
+                            <constraint firstItem="7VD-Ff-WWB" firstAttribute="top" secondItem="dtS-hP-OeJ" secondAttribute="bottom" constant="8" id="Q6l-cf-QMs"/>
+                            <constraint firstItem="7VD-Ff-WWB" firstAttribute="centerX" secondItem="dtS-hP-OeJ" secondAttribute="centerX" id="VGM-Z6-9T2"/>
+                            <constraint firstItem="7VD-Ff-WWB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="thV-BK-mEV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="1a5-bl-7lI">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="dtS-hP-OeJ">
-                            <rect key="frame" x="10" y="5.5" width="355" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Top rated"/>
-                                <segment title="Popular"/>
-                                <segment title="Upcoming"/>
-                                <segment title="Now Playing"/>
-                            </segments>
+                    <navigationItem key="navigationItem" title="Movies" id="1a5-bl-7lI">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="line.horizontal.3.decrease.circle" catalog="system" id="dXQ-DF-yPO">
                             <connections>
-                                <action selector="segmentPickerMovies:" destination="BYZ-38-t0r" eventType="valueChanged" id="CWg-MX-gE5"/>
+                                <action selector="filterButton:" destination="BYZ-38-t0r" id="OgM-xT-etY"/>
                             </connections>
-                        </segmentedControl>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="moviesTablePicker" destination="dtS-hP-OeJ" id="i86-GA-QyA"/>
@@ -63,15 +67,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-744.79999999999995" y="-141.67916041979012"/>
+            <point key="canvasLocation" x="-748.59813084112147" y="-144.49244060475164"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gxb-pC-tor">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gqs-1R-dzN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nFX-AJ-rNe" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kuJ-oB-0Of">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="428" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -79,12 +84,12 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ylj-cl-f6y"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gqs-1R-dzN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1684" y="-141.67916041979012"/>
         </scene>
     </scenes>
     <resources>
+        <image name="line.horizontal.3.decrease.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

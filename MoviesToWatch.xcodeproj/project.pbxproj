@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87170899258F504F00727BDE /* FilterAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87170898258F504F00727BDE /* FilterAlertController.swift */; };
 		871F9E492582569100251BAD /* MoviesListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871F9E482582569100251BAD /* MoviesListDataModel.swift */; };
 		871F9E4D258289EC00251BAD /* ImageCacheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871F9E4C258289EC00251BAD /* ImageCacheModel.swift */; };
 		871F9E582583742700251BAD /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871F9E562583742700251BAD /* ContentTableViewCell.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		87170898258F504F00727BDE /* FilterAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAlertController.swift; sourceTree = "<group>"; };
 		871F9E482582569100251BAD /* MoviesListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListDataModel.swift; sourceTree = "<group>"; };
 		871F9E4C258289EC00251BAD /* ImageCacheModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheModel.swift; sourceTree = "<group>"; };
 		871F9E562583742700251BAD /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				877A9ADE2580A360008992A5 /* ViewController.swift */,
+				87170898258F504F00727BDE /* FilterAlertController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				8743AC6E2582194500370840 /* NetworkAPI.swift in Sources */,
 				871F9E4D258289EC00251BAD /* ImageCacheModel.swift in Sources */,
 				877A9ADF2580A360008992A5 /* ViewController.swift in Sources */,
+				87170899258F504F00727BDE /* FilterAlertController.swift in Sources */,
 				8743AC71258219DF00370840 /* DateFormattingHelper.swift in Sources */,
 				871F9E492582569100251BAD /* MoviesListDataModel.swift in Sources */,
 				877A9ADB2580A360008992A5 /* AppDelegate.swift in Sources */,

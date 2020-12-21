@@ -8,6 +8,10 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBAction func filterButton(_ sender: UIBarButtonItem) {
+        print("filter tap")
+        filteredMoviesList = FilterAlertController.showFilters(on: self, inArray: moviesListData) as! [MovieModel]
+    }
     @IBOutlet weak var moviesTableView: UITableView!
     @IBOutlet weak var searchBarMovies: UISearchBar!
     @IBOutlet weak var moviesTablePicker: UISegmentedControl!
@@ -27,6 +31,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            }
 //        }
 //    }
+    var filteredMoviesList = [MovieModel]()
     private var moviesListData = [MovieModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -34,7 +39,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesListDataSource.delegate = self

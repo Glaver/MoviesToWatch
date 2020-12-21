@@ -14,7 +14,7 @@ public struct MovieDataDTO: Codable {
     let results: [MovieModel]
 }
 
-struct MovieModel: Codable {
+struct MovieModel: Codable, FilterTvShowAndMovies {
     let popularity: Float
     let id: Int
     let title: String
