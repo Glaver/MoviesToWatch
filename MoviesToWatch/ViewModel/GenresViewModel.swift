@@ -1,15 +1,18 @@
 //
-//  GenresDataModel.swift
+//  GenresViewModel.swift
 //  MoviesToWatch
 //
-//  Created by Vladyslav on 15/12/20.
+//  Created by Vladyslav on 29/12/20.
 //
 
 import Foundation
 
+protocol GenresDataModelDelegate {
+    func didRecive(data: [GenresDTO])
+    func didFail(error: APIServiceError)
+}
 
-
-class GenresDataModel {
+final class GenresViewModel {
     var delegate: GenresDataModelDelegate?
     
     func requestData() {

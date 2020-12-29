@@ -8,6 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet weak var searchBarMovies: UISearchBar!
+    @IBOutlet weak var moviesTablePicker: UISegmentedControl!
+
+    @IBAction func segmentPickerMovies(_ sender: UISegmentedControl) {
+        moviesListDataSource.requestData(from: moviesTablePicker.selectedSegmentIndex)
+        moviesTableView.reloadData()
+    }
     @IBAction func filterButton(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Filter", message: "Choose filter:", preferredStyle: .actionSheet)
         
@@ -34,15 +42,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true)
     }
-    @IBOutlet weak var moviesTableView: UITableView!
-    @IBOutlet weak var searchBarMovies: UISearchBar!
-    @IBOutlet weak var moviesTablePicker: UISegmentedControl!
-    @IBAction func segmentPickerMovies(_ sender: UISegmentedControl) {
-        moviesListDataSource.requestData(from: moviesTablePicker.selectedSegmentIndex)
-        moviesTableView.reloadData()
-    }
-    private let moviesListDataSource = MoviesListDataModel()
-    private let genresDataSource = GenresDataModel()
+    private let moviesListDataSource = MovieViewModel(networkService: NetworkService.shared)
+    private let genresDataSource = GenresViewModel()
 //    private var movieGenresData = [GenresDTO]() {
 //        didSet {
 //            DispatchQueue.main.async {

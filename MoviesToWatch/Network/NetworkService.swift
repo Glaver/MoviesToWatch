@@ -8,31 +8,37 @@
 import Foundation
 import UIKit
 
-class NetworkService {
+protocol MovieListService {
+    func fetchMoviesList(from endpoint: URL?, result: @escaping (Result<MovieDataDTO, APIServiceError>) -> Void)
+}
+
+class NetworkService: MovieListService {
     public static let shared = NetworkService()
-    //MARK: - Fetch data reusable genric
+    //MARK: Fetch generic data
     private func fetchDataFrom<T: Decodable>(_ url: URL?, completion: @escaping (Result<T, APIServiceError>) -> Void) {
         guard let finalURL = url else {
             completion(.failure(.invalidEndpoint))
             return
         }
-        URLSession.shared.dataTask(with: finalURL) { (result) in
-            switch result {
-            case .success(let (response, data)):
-                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
-                    completion(.failure(.invalidResponse))
-                    return
+        DispatchQueue.main.async {
+            URLSession.shared.dataTask(with: finalURL) { (result) in
+                switch result {
+                case .success(let (response, data)):
+                    guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
+                        completion(.failure(.invalidResponse))
+                        return
+                    }
+                    do {
+                        let values = try NetworkAPI.jsonDecoder.decode(T.self, from: data)
+                        completion(.success(values))
+                    } catch {
+                        completion(.failure(.decodeError))
+                    }
+                case .failure: //case .failure(let error):
+                    completion(.failure(.apiError))
                 }
-                do {
-                    let values = try NetworkAPI.jsonDecoder.decode(T.self, from: data)
-                    completion(.success(values))
-                } catch {
-                    completion(.failure(.decodeError))
-                }
-            case .failure: //case .failure(let error):
-                completion(.failure(.apiError))
-            }
-        }.resume()
+            }.resume()
+        }
     }
     //MARK: - FetchImage
     private static func getData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
@@ -56,22 +62,16 @@ class NetworkService {
     }
     //MARK: - FetchMovieList
     public func fetchMoviesList(from endpoint: URL?, result: @escaping (Result<MovieDataDTO, APIServiceError>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
             self.fetchDataFrom(endpoint, completion: result)
-        }
     }
     //MARK: - FetchMovieGenres
     public func fetchMovieGenres(from endpoint: URL?, result: @escaping (Result<[GenresDTO], APIServiceError>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
             self.fetchDataFrom(endpoint, completion: result)
-        }
     }
     //MARK: - FetchMovieSearch
     public func fetchMoviesSearch(from string: String, result: @escaping (Result<MovieDataDTO, APIServiceError>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
             self.fetchDataFrom(Endpoint.search(searchString: string).finalURL, completion: result)
         }
-    }
 }
 
 extension URLSession {
